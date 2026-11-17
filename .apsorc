@@ -1,0 +1,136 @@
+{
+  "entities": [
+    {
+      "name": "Project",
+      "fields": [
+        {
+          "name": "name",
+          "type": "varchar",
+          "isIndex": false,
+          "primary": false,
+          "isUnique": false,
+          "nullable": false
+        },
+        {
+          "name": "details",
+          "type": "text",
+          "nullable": true,
+          "primary": false,
+          "isUnique": false,
+          "isIndex": false
+        },
+        {
+          "name": "slug",
+          "type": "varchar",
+          "isIndex": true,
+          "primary": false,
+          "isUnique": true,
+          "nullable": false
+        }
+      ],
+      "indexes": [
+        {
+          "fields": [
+            "slug"
+          ],
+          "unique": true
+        }
+      ],
+      "uniques": [
+        {
+          "name": "unique_project_slug",
+          "fields": [
+            "slug"
+          ]
+        }
+      ],
+      "created_at": true,
+      "updated_at": true
+    },
+    {
+      "name": "Task",
+      "fields": [
+        {
+          "name": "title",
+          "type": "varchar",
+          "isIndex": false,
+          "primary": false,
+          "isUnique": false,
+          "nullable": false
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "isIndex": false,
+          "primary": false,
+          "isUnique": false,
+          "nullable": true
+        },
+        {
+          "name": "completed",
+          "type": "boolean",
+          "default": false,
+          "isIndex": true,
+          "primary": false,
+          "isUnique": false,
+          "nullable": false
+        },
+        {
+          "name": "priority",
+          "type": "enum",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "isIndex": true,
+          "primary": false,
+          "isUnique": false,
+          "nullable": true
+        },
+        {
+          "name": "due_date",
+          "type": "date",
+          "isIndex": true,
+          "primary": false,
+          "isUnique": false,
+          "nullable": true
+        }
+      ],
+      "indexes": [
+        {
+          "fields": [
+            "completed"
+          ],
+          "unique": false
+        },
+        {
+          "fields": [
+            "priority"
+          ],
+          "unique": false
+        },
+        {
+          "fields": [
+            "due_date"
+          ],
+          "unique": false
+        }
+      ],
+      "uniques": [],
+      "created_at": true,
+      "updated_at": true
+    }
+  ],
+  "relationships": [
+    {
+      "to": "Project",
+      "from": "Task",
+      "type": "ManyToOne",
+      "index": true
+    }
+  ],
+  "version": 2,
+  "rootFolder": "src",
+  "apiType": "Rest"
+}
